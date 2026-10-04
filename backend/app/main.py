@@ -2,10 +2,15 @@
 
 Lancer le serveur (depuis le dossier backend) :
     uvicorn app.main:app --reload
-Puis ouvrir http://127.0.0.1:8000/docs pour tester l'API dans le navigateur.
+Puis ouvrir :
+    http://127.0.0.1:8000/       → le site Plume (dossier frontend)
+    http://127.0.0.1:8000/docs   → tester l'API dans le navigateur
 """
 
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 
 from app.matieres import MATIERES
 
@@ -40,3 +45,9 @@ def detail_matiere(matiere_id: str):
             return m
     # Si on ne trouve pas la matière, on renvoie une erreur 404 (« introuvable »)
     raise HTTPException(status_code=404, detail="Matière introuvable")
+
+
+# Le site (HTML, CSS, JS) est dans le dossier frontend, à côté de backend.
+# On le monte en dernier : les routes de l'API au-dessus restent prioritaires.
+DOSSIER_FRONTEND = Path(__file__).resolve().parents[2] / "frontend"
+app.mount("/", StaticFiles(directory=DOSSIER_FRONTEND, html=True), name="site")

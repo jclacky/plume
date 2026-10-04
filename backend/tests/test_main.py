@@ -30,3 +30,16 @@ def test_detail_matiere():
 def test_matiere_introuvable():
     reponse = client.get("/matieres/astronomie")
     assert reponse.status_code == 404
+
+
+def test_site_page_accueil():
+    """La page d'accueil du site est servie à l'adresse /."""
+    reponse = client.get("/")
+    assert reponse.status_code == 200
+    assert "Reprendre ses études" in reponse.text
+
+
+def test_site_application():
+    reponse = client.get("/app.html")
+    assert reponse.status_code == 200
+    assert "Tableau de bord" in reponse.text

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F5F4ED">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<title>Plume — Reprendre ses études</title>
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/lucide.min.js"></script>
+<style>
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.lnav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--plume-snow) 88%,transparent);backdrop-filter:blur(12px)}
+.lnav .wrap{display:flex;align-items:center;gap:8px;height:76px}
+.brand{font-weight:700;font-size:26px;letter-spacing:-0.05em;display:flex;align-items:center;gap:8px;margin-right:auto;color:var(--color-text);text-decoration:none}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--plume-orange);display:block}
+.lnav .links{display:flex;gap:4px}
+.lnav .links a{color:var(--color-text);text-decoration:none;font-size:15px;font-weight:500;padding:8px 14px;border-radius:var(--radius-pill)}
+.lnav .links a:hover{background:color-mix(in srgb,var(--plume-kite) 6%,transparent)}
+.hero{margin-top:8px;padding:72px 64px 56px;min-height:640px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:end;border-radius:var(--radius-xl)}
+.hero h1{font-size:88px;line-height:.98;letter-spacing:-0.045em;margin:0 0 24px;max-width:11ch}
+.hero p{font-size:20px;max-width:40ch;margin:0 0 32px}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn-lg{min-height:56px;padding:16px 28px;font-size:16px}
+.peek{display:grid;gap:10px}
+.peek>div{padding:18px 20px;border-radius:var(--radius-md);background:color-mix(in srgb,var(--plume-snow) 72%,transparent);backdrop-filter:blur(10px)}
+.peek small{display:block;font-size:13px;color:var(--color-text-soft);margin-bottom:4px}
+.peek b{font-weight:600;font-size:17px}
+.peek s{text-decoration:line-through;text-decoration-color:var(--plume-orange);text-decoration-thickness:2px}
+.peek em{font-style:normal;background:var(--color-accent-2-200);padding:0 6px;border-radius:6px}
+section.s{padding:112px 0 0}
+.s-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.s-head h2{font-size:52px;letter-spacing:-0.04em;margin:0;max-width:16ch}
+.s-head p{max-width:38ch;margin:0;font-size:17px;color:var(--color-neutral-700)}
+.pr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pr>div{border-radius:var(--radius-lg);padding:32px;min-height:300px;display:flex;flex-direction:column;gap:12px}
+.pr .n{font-size:64px;font-weight:600;letter-spacing:-0.05em;line-height:1;margin-bottom:auto}
+.pr h3{margin:0;font-size:26px}
+.pr p{margin:0;font-size:16px}
+.subj{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.subj div{border-radius:var(--radius-md);padding:20px;min-height:180px;display:flex;flex-direction:column;justify-content:space-between}
+.subj svg{width:24px;height:24px}
+.subj b{font-weight:600;font-size:17px;line-height:1.15;display:block}
+.subj small{font-size:13px;opacity:.85}
+.feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.feat>div{border-radius:var(--radius-lg);padding:36px;display:flex;flex-direction:column;gap:14px;min-height:360px}
+.feat h3{font-size:32px;letter-spacing:-0.03em;margin:0;max-width:16ch}
+.feat ul{list-style:none;margin:auto 0 0;padding:0;display:grid;gap:10px}
+.feat li{display:flex;gap:12px;align-items:center;font-size:16px}
+.feat li svg{width:18px;height:18px;flex:none}
+.end{margin:112px 0 0;padding:80px 64px;border-radius:var(--radius-xl);display:flex;flex-direction:column;align-items:flex-start;gap:24px}
+.end h2{font-size:64px;letter-spacing:-0.045em;margin:0;max-width:14ch}
+.end p{font-size:18px;margin:0;max-width:44ch;color:color-mix(in srgb,var(--plume-snow) 82%,transparent)}
+footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:40px 0 48px;font-size:14px;color:var(--color-text-soft)}
+footer a{color:inherit}
+@media (max-width:959px){
+.wrap{padding:0 16px}
+.lnav .wrap{height:64px}
+.lnav .links{display:none}
+.brand{font-size:22px}
+.hero{grid-template-columns:1fr;padding:40px 24px 24px;min-height:0;gap:32px;border-radius:var(--radius-lg)}
+.hero h1{font-size:48px}
+.hero p{font-size:17px}
+.cta .btn{flex:1}
+section.s{padding-top:72px}
+.s-head{margin-bottom:24px}
+.s-head h2{font-size:36px}
+.pr,.feat{grid-template-columns:1fr}
+.pr>div{min-height:0;padding:24px}
+.pr .n{font-size:44px;margin-bottom:12px}
+.subj{grid-template-columns:repeat(2,minmax(0,1fr))}
+.subj b{font-size:15px;overflow-wrap:anywhere}
+.subj div{min-height:130px}
+.subj div:last-child{grid-column:span 2;min-height:96px}
+.feat>div{padding:24px;min-height:0}
+.feat h3{font-size:26px}
+.feat ul{margin-top:12px}
+.end{margin-top:72px;padding:40px 24px;border-radius:var(--radius-lg)}
+.end h2{font-size:40px}
+.end .btn{width:100%}
+footer{flex-direction:column;padding-bottom:32px}
+}
+</style>
+</head>
+<body>
+<header class="lnav"><div class="wrap">
+<a class="brand" href="index.html"><i></i>Plume</a>
+<nav class="links"><a href="#methode">La méthode</a><a href="#matieres">Matières</a><a href="#outils">Outils</a></nav>
+<a class="btn btn-ghost" href="connexion.html?mode=login">Se connecter</a>
+<a class="btn btn-dark" href="connexion.html">Commencer</a>
+</div></header>
+<main class="wrap">
+<section class="glow glow-sun hero" data-screen-label="Accueil · héros">
+<div>
+<span class="tag tag-dark" style="margin-bottom:24px">Remise à niveau universitaire</span>
+<h1>Reprendre ses études, une règle à la fois.</h1>
+<p>Français académique, anglais, sciences : Plume vous fait trouver vos erreurs et vous explique la règle. Quinze minutes par jour, même hors ligne.</p>
+<div class="cta"><a class="btn btn-primary btn-lg" href="connexion.html">Évaluer mon niveau<i data-lucide="arrow-right"></i></a><a class="btn btn-secondary btn-lg" href="#methode">Comment ça marche</a></div>
+</div>
+<div class="peek" aria-hidden="true">
+<div><small>Votre phrase</small><b>Bien que la réunion <s>a été</s> reportée, nous avons maintenu l'ordre du jour.</b></div>
+<div><small>Plume signale</small><b>Un mode ne va pas après « bien que ». Lequel faut-il ?</b></div>
+<div><small>Vous corrigez</small><b>Bien que la réunion <em>ait été</em> reportée…</b></div>
+</div>
+</section>
+
+<section class="s" id="methode" data-screen-label="Accueil · méthode">
+<div class="s-head"><h2>L'IA guide, vous corrigez.</h2><p>Pas de correction toute faite : chaque erreur devient une règle que vous retenez.</p></div>
+<div class="pr">
+<div class="block-mist"><span class="n">01</span><h3>Un test de niveau</h3><p>Dans chaque matière choisie : l'échelle CECRL pour les langues, un positionnement par chapitre pour les sciences.</p></div>
+<div class="block-aqua"><span class="n">02</span><h3>Un programme sur mesure</h3><p>Plume commence par vos points faibles : accords, registres, connecteurs.</p></div>
+<div class="block-kite"><span class="n">03</span><h3>Quinze minutes par jour</h3><p>Un entraînement court, téléchargé d'avance, pour le RER comme pour le bureau.</p></div>
+</div>
+</section>
+
+<section class="s" id="matieres" data-screen-label="Accueil · matières">
+<div class="s-head"><h2>Sept matières, un seul fil.</h2><p>Le français académique d'abord, puis les sciences du programme universitaire.</p></div>
+<div class="subj">
+<div class="block-orange"><i data-lucide="pen-line"></i><div><b>Français</b><small>A1 → C2</small></div></div>
+<div class="block-aqua"><i data-lucide="languages"></i><div><b>Anglais</b><small>A1 → C2</small></div></div>
+<div class="block-kite"><i data-lucide="sigma"></i><div><b>Mathématiques</b><small>150 h</small></div></div>
+<div class="block-garnet"><i data-lucide="atom"></i><div><b>Physique</b><small>90 h</small></div></div>
+<div class="block-mist"><i data-lucide="flask-conical"></i><div><b>Chimie</b><small>90 h</small></div></div>
+<div style="background:var(--color-accent-2-700);color:var(--plume-snow)"><i data-lucide="dna"></i><div><b>Biologie</b><small>90 h</small></div></div>
+<div style="background:var(--color-accent-200)"><i data-lucide="globe"></i><div><b>Culture générale</b><small>Bientôt</small></div></div>
+</div>
+</section>
+
+<section class="s" id="outils" data-screen-label="Accueil · outils">
+<div class="s-head"><h2>Écrire et parler comme à l'université.</h2></div>
+<div class="feat">
+<div class="glow glow-mist"><span class="tag tag-dark" style="align-self:flex-start">Atelier d'écriture</span><h3>Vos courriels et dissertations, relus avec vous.</h3><ul><li><i data-lucide="check"></i>Erreurs classées : accord, temps, homophone, registre</li><li><i data-lucide="check"></i>La règle expliquée, jamais la réponse seule</li><li><i data-lucide="check"></i>Fiches méthodologiques : dissertation, synthèse, soutenance</li></ul></div>
+<div class="block-mist" style="border-radius:var(--radius-lg)"><span class="tag tag-accent" style="align-self:flex-start">Studio d'oral</span><h3>Vos tics de langage, repérés et remplacés.</h3><ul><li><i data-lucide="mic"></i>Exposés et entretiens enregistrés</li><li><i data-lucide="repeat"></i>« Du coup » relevé ? Plume propose « par conséquent »</li><li><i data-lucide="cloud-off"></i>Vos réponses se synchronisent à la reconnexion</li></ul></div>
+</div>
+</section>
+
+<section class="glow glow-ember end" data-screen-label="Accueil · appel final">
+<h2>Où en est votre français ?</h2>
+<p>Créez votre compte et passez le test de niveau. Votre programme est prêt en cinq minutes.</p>
+<a class="btn btn-primary btn-lg" href="connexion.html">Commencer le test<i data-lucide="arrow-right"></i></a>
+</section>
+<footer><span>Plume · 2026</span><span style="display:flex;gap:20px"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">Contact</a></span></footer>
+</main>
+<script>lucide.createIcons();</script>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");</script>
+</body>
+</html>

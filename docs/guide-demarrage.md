@@ -45,6 +45,8 @@ uvicorn app.main:app --reload
 
 Ouvre http://127.0.0.1:8000/docs dans ton navigateur. Tu vois la liste des « routes » de l'API : clique sur **GET /matieres**, puis **Try it out**, puis **Execute**. Les 7 matières s'affichent !
 
+Pour voir le site Plume, ouvre http://127.0.0.1:8000/ : la page d'accueil s'affiche. Clique sur **Commencer**, puis remplis le formulaire pour entrer dans l'application. Sur ton téléphone, le site est conçu pour l'écran mobile.
+
 > `--reload` relance le serveur tout seul à chaque fois que tu modifies le code. Pour l'arrêter : `Ctrl+C`.
 
 ## 5. Lancer les tests

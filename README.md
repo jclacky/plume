@@ -12,6 +12,7 @@ Principe : l'apprenant écrit ou s'enregistre, l'IA signale les erreurs **sans d
 | `docs/guide-demarrage.md` | Comment récupérer le projet et lancer le serveur sur son ordinateur |
 | `base-connaissances/` | Les fiches pédagogiques que l'IA utilise (niveaux, programmes, grammaire, méthodes) |
 | `backend/` | Le serveur (API) en FastAPI / Python |
+| `frontend/` | Le site (application web PWA) : accueil, connexion, tableau de bord, matières, méthodes, test de niveau |
 | `CLAUDE.md` | Les consignes pour Claude quand il travaille sur le projet |
 
 ## Démarrage rapide

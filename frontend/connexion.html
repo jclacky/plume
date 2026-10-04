@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F5F4ED">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<title>Plume — Connexion</title>
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/lucide.min.js"></script>
+<style>
+body{min-height:100vh}
+.auth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;min-height:100vh;padding:16px}
+.art{border-radius:var(--radius-xl);padding:40px;display:flex;flex-direction:column;gap:24px}
+.brand{font-weight:700;font-size:26px;letter-spacing:-0.05em;display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--plume-orange);display:block}
+.art h1{font-size:64px;line-height:1;letter-spacing:-0.045em;margin:auto 0 0;max-width:12ch}
+.art p{font-size:18px;margin:0;max-width:38ch;color:color-mix(in srgb,var(--plume-snow) 82%,transparent)}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.flow div{padding:14px 16px;border-radius:var(--radius-md);background:color-mix(in srgb,var(--plume-snow) 12%,transparent);font-size:13px}
+.flow div.on{background:var(--plume-snow);color:var(--plume-kite)}
+.flow b{display:block;font-size:15px;font-weight:600;margin-bottom:2px}
+.pane{display:flex;align-items:center;justify-content:center;padding:40px 24px}
+form{width:min(420px,100%);display:flex;flex-direction:column;gap:18px}
+form h2{font-size:36px;letter-spacing:-0.035em;margin:0}
+.sub{margin:-8px 0 4px;color:var(--color-neutral-700)}
+.goals{display:flex;flex-wrap:wrap;gap:8px}
+.goal{all:unset;cursor:pointer;font-size:14px;font-weight:500;padding:10px 16px;border-radius:var(--radius-pill);background:var(--plume-mist);min-height:20px}
+.goal:hover{background:var(--color-neutral-400)}
+.goal[aria-pressed="true"]{background:var(--plume-kite);color:var(--plume-snow)}
+.goal:focus-visible{outline:2px solid var(--plume-orange);outline-offset:2px}
+.pw{position:relative}
+.pw .input{padding-right:52px}
+.pw button{position:absolute;right:4px;top:2px}
+.or{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--color-text-soft)}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--color-divider)}
+.small{font-size:13px;color:var(--color-text-soft);margin:0;text-align:center}
+.err{font-size:13px;color:var(--color-accent-700);margin-top:6px}
+[hidden]{display:none!important}
+@media (max-width:959px){
+.auth{grid-template-columns:1fr;padding:12px;min-height:0}
+.art{padding:24px;gap:16px;border-radius:var(--radius-lg)}
+.art h1{font-size:34px;margin-top:24px}
+.art p{font-size:15px}
+.flow{display:none}
+.pane{padding:16px 8px 40px;align-items:flex-start}
+form h2{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="auth">
+<aside class="glow glow-ember art" data-screen-label="Connexion · visuel">
+<a class="brand" href="index.html"><i></i>Plume</a>
+<h1 id="art-h">Situez votre niveau, matière par matière.</h1>
+<p id="art-p">Créez votre compte, puis passez directement le test. Votre programme se construit à partir de vos réponses.</p>
+<div class="flow"><div class="on"><b>1 · Compte</b>30 secondes</div><div><b>2 · Test</b>Matières au choix</div><div><b>3 · Programme</b>Prêt aussitôt</div></div>
+</aside>
+<div class="pane">
+<form id="f" novalidate data-screen-label="Connexion · formulaire">
+<div class="seg" role="radiogroup" style="align-self:flex-start"><label class="seg-opt"><input type="radio" name="mode" value="signup" checked>Créer un compte</label><label class="seg-opt"><input type="radio" name="mode" value="login">Se connecter</label></div>
+<h2 id="t">Bienvenue sur Plume</h2>
+<p class="sub" id="st">Quelques informations, puis le test de niveau.</p>
+<div class="field" data-only="signup"><label for="name">Prénom</label><input class="input" id="name" autocomplete="given-name" placeholder="Cleid"></div>
+<div class="field"><label for="mail">Adresse e-mail</label><input class="input" id="mail" type="email" autocomplete="email" placeholder="vous@exemple.fr"><div class="err" id="e-mail" hidden>Saisissez une adresse e-mail valide.</div></div>
+<div class="field"><label for="pw">Mot de passe</label><div class="pw"><input class="input" id="pw" type="password" autocomplete="new-password" placeholder="8 caractères minimum"><button type="button" class="btn btn-ghost btn-icon" id="eye" aria-label="Afficher le mot de passe"><i data-lucide="eye"></i></button></div><div class="err" id="e-pw" hidden>8 caractères minimum.</div></div>
+<div class="field" data-only="signup"><label>Votre objectif</label><div class="goals"><button type="button" class="goal" aria-pressed="true">Reprendre une licence</button><button type="button" class="goal" aria-pressed="false">Entrer en master</button><button type="button" class="goal" aria-pressed="false">Préparer un concours</button><button type="button" class="goal" aria-pressed="false">Écrire en contexte pro</button></div></div>
+<button class="btn btn-primary btn-block" style="min-height:52px;font-size:15px" id="go">Continuer vers le test de niveau<i data-lucide="arrow-right"></i></button>
+<div class="or">ou</div>
+<button type="button" class="btn btn-secondary btn-block" id="g"><i data-lucide="mail"></i>Recevoir un lien de connexion</button>
+<p class="small" data-only="signup">En créant un compte, vous acceptez les conditions d'utilisation.</p>
+<p class="small" data-only="login"><a href="#">Mot de passe oublié ?</a></p>
+</form>
+</div>
+</div>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const set=m=>{
+ document.querySelectorAll('[data-only]').forEach(el=>el.hidden=el.dataset.only!==m);
+ const su=m==="signup";
+ $("#t").textContent=su?"Bienvenue sur Plume":"Bon retour";
+ $("#st").textContent=su?"Quelques informations, puis le test de niveau.":"Reprenez là où vous vous étiez arrêté.";
+ $("#go").firstChild.textContent=su?"Continuer vers le test de niveau":"Se connecter";
+ $("#pw").autocomplete=su?"new-password":"current-password";
+ $("#art-h").textContent=su?"Situez votre niveau, matière par matière.":"Votre entraînement du jour vous attend.";
+ $("#art-p").textContent=su?"Créez votre compte, puis passez directement le test. Votre programme se construit à partir de vos réponses.":"Vos réponses hors ligne seront synchronisées dès la connexion.";
+ document.querySelector('input[value="'+m+'"]').checked=true;
+};
+document.querySelectorAll('input[name="mode"]').forEach(r=>r.onchange=()=>set(r.value));
+set(new URLSearchParams(location.search).get("mode")==="login"?"login":"signup");
+document.querySelectorAll(".goal").forEach(b=>b.onclick=()=>document.querySelectorAll(".goal").forEach(x=>x.setAttribute("aria-pressed",x===b)));
+$("#eye").onclick=()=>{const p=$("#pw");p.type=p.type==="password"?"text":"password";};
+$("#f").onsubmit=e=>{e.preventDefault();
+ const okM=/^\S+@\S+\.\S+$/.test($("#mail").value),okP=$("#pw").value.length>=8;
+ $("#e-mail").hidden=okM;$("#e-pw").hidden=okP;
+ if(!okM||!okP)return;
+ const login=document.querySelector('input[name="mode"]:checked').value==="login";
+ location.href="app.html#"+(login?"accueil":"test");
+};
+$("#g").onclick=()=>{$("#g").innerHTML='<i data-lucide="check"></i>Lien envoyé, vérifiez vos e-mails';lucide.createIcons();};
+lucide.createIcons();
+})();
+</script>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");</script>
+</body>
+</html>
