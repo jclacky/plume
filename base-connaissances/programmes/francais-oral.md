@@ -1,6 +1,6 @@
 # Programme d'oral du français (B1 → C1)
 
-La grammaire ne suffit pas pour bien parler. Ce programme suit les **situations de communication** : ce qu'on doit savoir *faire* avec la langue, dans des contextes variés. Il complète le programme de grammaire (`francais-grammaire.md`).
+La grammaire ne suffit pas pour bien parler. Ce programme suit les **situations de communication** : ce qu'on doit savoir *faire* avec la langue, dans des contextes variés. Il complète le programme de grammaire (`francais-grammaire.md`). L'ordre de travail vient des objectifs (`francais-objectifs.md`) : cette liste est une boîte à outils.
 
 ## Structure d'une unité
 

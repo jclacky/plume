@@ -1,6 +1,6 @@
 # Programme de grammaire du français (B1 → C1)
 
-Plume suit cette progression pour la partie Grammaire du français. Elle couvre toute la langue, pas seulement les verbes. Chaque point devient un chapitre dans `base-connaissances/grammaire/`, avec : Cours oral, Cours écrit, Fiche, Exercices, Quiz. On peut travailler les chapitres dans le désordre, selon le résultat du test de niveau. Un **bilan** termine chaque partie.
+Cette liste est une **boîte à outils** : l'ordre de travail vient des objectifs (`francais-objectifs.md`). Elle couvre toute la langue, pas seulement les verbes. Chaque point devient un chapitre dans `base-connaissances/grammaire/`, avec : Cours oral, Cours écrit, Fiche, Exercices, Quiz. Un **bilan** termine chaque partie.
 
 ## Partie 1. Le nom et ce qui l'accompagne
 | # | Chapitre | État |
