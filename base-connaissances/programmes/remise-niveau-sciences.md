@@ -1,6 +1,6 @@
 # Programme des matières scientifiques (remise à niveau, niveau 1)
 
-Plume suit le programme du parcours qualifiant suivi par lei : **remise à niveau scientifique, niveau 1, Sorbonne Université** (session du 5 octobre 2026 au 4 juin 2027). Objectif de la formation : un niveau équivalent au baccalauréat scientifique, validé par un examen écrit (attestation de compétences).
+Plume suit le programme d'une **remise à niveau scientifique universitaire, niveau 1** (octobre 2026 à juin 2027). Objectif de la formation : un niveau équivalent au baccalauréat scientifique, validé par un examen écrit (attestation de compétences).
 
 Chaque matière ci-dessous devient une page « Matière » dans Plume. Chaque chapitre devient une unité avec : fiche de cours, exercices niveau bac, notes de l'apprenant, quiz et progression.
 
@@ -48,4 +48,4 @@ Le **français**, l'**anglais** et la **culture générale** ne font pas partie 
 - culture générale : à définir.
 
 ---
-Source : fiche « Parcours qualifiant Remise à niveau scientifique – Niveau 1 », Sorbonne Université, Formation professionnelle continue (PDF généré le 20/09/2026). Seuls les titres de chapitres sont repris.
+Source : programme officiel d'une remise à niveau scientifique universitaire, niveau 1 (2026). Seuls les titres de chapitres sont repris.

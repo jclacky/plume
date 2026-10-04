@@ -13,14 +13,14 @@ Son principe fondamental est l'apprentissage actif guidé par l'IA :
 
 ### Matières et programme de référence
 
-Les sciences suivent le programme officiel de la remise à niveau scientifique (niveau 1, Sorbonne Université, session du 5 octobre 2026 au 4 juin 2027). Chaque chapitre devient une unité : fiche de cours, exercices niveau bac, notes de l'apprenant, quiz.
+Les sciences suivent le programme d'une remise à niveau scientifique universitaire de niveau 1 (octobre 2026 à juin 2027). Chaque chapitre devient une unité : fiche de cours, exercices niveau bac, notes de l'apprenant, quiz.
 
 | Matière | Référence | Chapitres |
 | --- | --- | --- |
-| Mathématiques (150 h) | Programme Sorbonne | Calcul algébrique, trigonométrie, nombres complexes, étude de fonctions, calcul intégral, probabilités |
-| Physique (90 h) | Programme Sorbonne | Mécanique, électromagnétisme, vibrations et propagation, ondes |
-| Chimie (90 h) | Programme Sorbonne | Structure de la matière, solutions, acidité et pH, oxydoréduction, dosages, estérification et hydrolyse, chimie organique, analyses spectrales |
-| Biologie (90 h) | Programme Sorbonne | Cellule, constituants du vivant, cycle cellulaire, génétique, système immunitaire, procréation, endocrinologie, un dernier système (à préciser) |
+| Mathématiques (150 h) | Programme universitaire | Calcul algébrique, trigonométrie, nombres complexes, étude de fonctions, calcul intégral, probabilités |
+| Physique (90 h) | Programme universitaire | Mécanique, électromagnétisme, vibrations et propagation, ondes |
+| Chimie (90 h) | Programme universitaire | Structure de la matière, solutions, acidité et pH, oxydoréduction, dosages, estérification et hydrolyse, chimie organique, analyses spectrales |
+| Biologie (90 h) | Programme universitaire | Cellule, constituants du vivant, cycle cellulaire, génétique, système immunitaire, procréation, endocrinologie, un dernier système (à préciser) |
 | Français | Niveaux CECRL A1 à C2 | Grammaire, orthographe, vocabulaire, conjugaison, syntaxe, ponctuation, registres, méthodes universitaires |
 | Anglais | Niveaux CECRL A1 à C2 | Même organisation que le français |
 | Culture générale | À définir | — |
@@ -119,7 +119,7 @@ Le projet repose sur une base de connaissances écrite par nous, à partir de so
 | Temps | Environ 2 h par semaine pour le projet | — |
 | Budget | outils gratuits pour le reste (GitHub, VS Code, Python) | À vérifier en service |
 | Outils | VS Code, GitHub, FastAPI, Claude Design (écrans), Claude Code ou Cowork (construction) | Comptes à créer : dépôt GitHub |
-| Programme des sciences | Fiche officielle de la remise à niveau scientifique, niveau 1 (Sorbonne Université) | Chapitres repris dans base-connaissances/programmes/ |
+| Programme des sciences | Programme officiel d'une remise à niveau scientifique universitaire, niveau 1 | Chapitres repris dans base-connaissances/programmes/ |
 
 Le détail des sources et de leurs droits est dans `notes/sources-donnees.md` (dossier du projet).
 
