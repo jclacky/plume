@@ -26,6 +26,6 @@ Chaque fiche est un fichier Markdown court (une page au maximum), avec :
 ## État
 
 - [x] `niveaux/` : B1, B2, C1, C2 (première version)
-- [ ] `grammaire/`
+- [~] `grammaire/` : premier chapitre modèle (subjonctif présent)
 - [ ] `methodes/`
 - [ ] `examens/`
