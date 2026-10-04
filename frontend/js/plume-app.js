@@ -15,15 +15,23 @@ function renderSubj(){
  $("#tiles").innerHTML=D.subjects.map(s=>`<button class="tile" aria-pressed="${s.id===subj}" data-s="${s.id}" style="background:${s.bg};color:${s.fg}"><i data-lucide="${s.icon}"></i><div><b>${s.name}</b><br><small>${s.hours}</small></div></button>`).join("");
  document.querySelectorAll(".tile").forEach(t=>t.onclick=()=>{subj=t.dataset.s;renderSubj();icons();});
  const s=D.subjects.find(x=>x.id===subj);
- $("#d-label").innerHTML=`<span>${s.name} · ${s.ch.length||"—"} chapitres</span><span>${s.ref}</span>`;
+ $("#d-label").innerHTML=`<span>${s.name} · ${s.ch.length||"—"} ${s.id==="fr"?"étapes":"chapitres"}</span><span>${s.ref}</span>`;
  // Les parties de chaque chapitre. Le français n'a pas de « Notes » :
  // il n'y a pas de cours de français à l'université, Plume est le cours.
  const parts=s.id==="fr"?["Cours","Fiche","Exercices","Quiz"]:["Cours","Fiche","Exercices","Notes","Quiz"];
+ if(s.id==="fr"){renderEtapes();}else
  $("#chapters").innerHTML=s.ch.length?s.ch.map((c,i)=>{const st=chapState(s,i);const ok=st==="done"?parts.length:st==="now"?2:0;
   return `<div class="chap ${st}"><span class="k">${st==="done"?'<i data-lucide="check" style="width:16px;height:16px"></i>':i+1}</span><div><b>${c}</b><div class="parts">${parts.map((p,j)=>`<span class="${j<ok?"ok":""}">${p}</span>`).join("")}</div></div>${st==="now"?'<a class="btn btn-primary btn-sm" href="#accueil">Reprendre</a>':st==="done"?'<span class="tag tag-accent-2">Validé</span>':'<span class="tag tag-outline">À venir</span>'}</div>`}).join("")
   :`<div class="card" style="padding:28px"><div class="card-title">Programme à définir</div><p class="card-body">Les chapitres de culture générale seront ajoutés quand le programme sera fixé.</p></div>`;
  const done=s.ch.filter((_,i)=>chapState(s,i)==="done").length;
- $("#d-side").innerHTML=`<div class="sec" style="margin:0">Progression</div><div class="big">${s.p}<span style="font-size:28px"> %</span></div><div class="progress"><i style="--v:${s.p}%"></i></div><p style="margin:0;font-size:14px">${done} chapitre${done>1?"s":""} validé${done>1?"s":""} sur ${s.ch.length||"—"}.${s.id==="ma"||s.id==="ph"||s.id==="ch"||s.id==="bi"?" Examen écrit en juin 2027.":""}</p>${s.id==="fr"?"":`<a class="btn btn-secondary btn-block" href="#accueil"><i data-lucide="upload"></i>Ajouter mes notes</a>`}`;
+ $("#d-side").innerHTML=`<div class="sec" style="margin:0">Progression</div><div class="big">${s.p}<span style="font-size:28px"> %</span></div><div class="progress"><i style="--v:${s.p}%"></i></div><p style="margin:0;font-size:14px">${done} ${s.id==="fr"?"étape":"chapitre"}${done>1?"s":""} validé${s.id==="fr"?"e":""}${done>1?"s":""} sur ${s.ch.length||"—"}.${s.id==="ma"||s.id==="ph"||s.id==="ch"||s.id==="bi"?" Examen écrit en juin 2027.":""}</p>${s.id==="fr"?"":`<a class="btn btn-secondary btn-block" href="#accueil"><i data-lucide="upload"></i>Ajouter mes notes</a>`}`;
+}
+
+// Français : une carte par étape du programme, avec ses chapitres.
+// Un chapitre déjà écrit (slug) s'ouvre ; les autres sont « À écrire ».
+function renderEtapes(){
+ $("#chapters").innerHTML=D.etapes.map((e,i)=>`<div class="chap etape ${i===0?"now":""}"><span class="k">${i+1}</span><div><b>${e.t}</b><div class="eyebrow" style="margin:2px 0 0">${e.dates} · ${e.final}</div>
+ <div class="items">${e.items.map(it=>it.slug?`<a class="item on" href="#cours/${it.slug}"><span class="tag tag-neutral">${it.type}</span><span class="it">${it.t}</span><i data-lucide="arrow-right"></i></a>`:`<div class="item"><span class="tag tag-outline">${it.type}</span><span class="it">${it.t}</span><small>À écrire</small></div>`).join("")}</div></div></div>`).join("");
 }
 
 function renderMethods(){
@@ -76,13 +84,72 @@ ${quiz.sel.length>1?`<div class="substep">${quiz.sel.map((x,j)=>`<span class="${
  $("#tagain").onclick=()=>{quiz={step:"intro",sel};rr();};
 }
 
+// ---------- Écran d'un chapitre ----------
+// Le chapitre est un fichier Markdown de base-connaissances, découpé par titres « ## ».
+let chap={slug:null,secs:{},tab:"Cours",mode:"oral",rep:{}};
+const md=t=>window.marked?marked.parse(t,{breaks:true}):`<pre>${t}</pre>`;
+function decouper(texte){
+ const sans=texte.replace(/^---[\s\S]*?---\s*/,""),secs={};let titre="_";
+ sans.split("\n").forEach(l=>{const m=l.match(/^## (.+)/);if(m){titre=m[1].trim();secs[titre]="";}else secs[titre]=(secs[titre]||"")+l+"\n";});
+ return {titre:(sans.match(/^# (.+)/m)||[,""])[1],secs};
+}
+// Le quiz du fichier : « 1. question », puis « - a) choix », la bonne réponse marquée ✔, puis « - Pourquoi : … »
+function lireQuiz(t){
+ return t.split(/\n(?=\d+\. )/).map(b=>b.trim()).filter(b=>/^\d+\. /.test(b)).map(b=>{
+  const l=b.split("\n").map(x=>x.trim());const q={q:l[0].replace(/^\d+\.\s*/,""),o:[],a:0,why:""};
+  l.slice(1).forEach(x=>{const m=x.match(/^- [a-d]\)\s*(.+)/);if(m){if(m[1].includes("✔"))q.a=q.o.length;q.o.push(m[1].replace(/\*\*/g,"").replace("✔","").trim());}
+   const w=x.match(/^- Pourquoi\s*:\s*(.+)/);if(w)q.why=w[1];});return q;});
+}
+function lireDialogue(){
+ const t=chap.secs["Cours oral"]||"";return t.split("\n").filter(l=>/^>\s*\*\*/.test(l)).map(l=>l.replace(/^>\s*\*\*[^*]+\*\*\s*:\s*/,"").replace(/[*_]/g,""));
+}
+function ecouter(){
+ if(!("speechSynthesis" in window))return alert("Votre navigateur ne sait pas lire à voix haute.");
+ speechSynthesis.cancel();const voix=speechSynthesis.getVoices().filter(v=>v.lang.startsWith("fr"));
+ lireDialogue().forEach((phrase,i)=>{const u=new SpeechSynthesisUtterance(phrase);u.lang="fr-FR";u.rate=.95;if(voix.length)u.voice=voix[i%Math.min(voix.length,2)];speechSynthesis.speak(u);});
+}
+async function ouvrirChapitre(slug){
+ if(chap.slug!==slug){
+  $("#c-root").innerHTML='<p class="text-muted">Chargement du chapitre…</p>';
+  try{const r=await fetch("contenu/grammaire/"+slug+".md");if(!r.ok)throw 0;const d=decouper(await r.text());chap={slug,titre:d.titre,secs:d.secs,tab:"Cours",mode:"oral",rep:{}};}
+  catch(e){$("#c-root").innerHTML='<p>Ce chapitre n\'est pas disponible hors ligne. Reconnectez-vous puis réessayez.</p>';return;}
+ }
+ renderChapitre();icons();
+}
+function renderChapitre(){
+ const C=$("#c-root"),tabs=["Cours","Fiche","Exercices","Quiz"],rr=()=>{renderChapitre();icons();};
+ let corps="";
+ if(chap.tab==="Cours"){
+  corps=`<div class="seg" role="radiogroup" style="margin-bottom:20px"><label class="seg-opt"><input type="radio" name="cmode" value="oral" ${chap.mode==="oral"?"checked":""}>Cours oral</label><label class="seg-opt"><input type="radio" name="cmode" value="ecrit" ${chap.mode==="ecrit"?"checked":""}>Cours écrit</label></div>`+
+  (chap.mode==="oral"?`<button class="btn btn-dark btn-sm" id="listen" style="margin-bottom:16px"><i data-lucide="volume-2"></i>Écouter le dialogue</button><div class="md">${md(chap.secs["Cours oral"]||"")}</div>`:`<div class="md">${md(chap.secs["Cours écrit"]||"")}</div>`);
+ }else if(chap.tab==="Fiche"){corps=`<div class="md block block-mist">${md(chap.secs["Fiche"]||"")}</div>`;}
+ else if(chap.tab==="Exercices"){
+  // Le corrigé est caché : on cherche d'abord, on vérifie ensuite.
+  const [ex,cor]=(chap.secs["Exercices"]||"").split(/^### Corrigé\s*$/m);
+  corps=`<div class="md">${md(ex)}</div>${cor?`<details class="corrige"><summary>Voir le corrigé</summary><div class="md">${md(cor)}</div></details>`:""}`;
+ }else{
+  const Q=lireQuiz(chap.secs["Quiz"]||"");
+  corps=`<div class="quiz">${Q.map((q,i)=>{const r=chap.rep[i];return `<div style="margin-bottom:28px"><div class="sec" style="margin-bottom:6px">Question ${i+1} / ${Q.length}</div><div class="q-prompt" style="font-size:20px;margin:0 0 14px">${md(q.q).replace(/<\/?p>/g,"")}</div><div class="q-opts" style="margin-bottom:12px">${q.o.map((o,j)=>{let st="";if(r!==undefined){if(j===q.a)st="border-color:var(--color-accent-2-600);background:var(--color-accent-2-100)";else if(j===r)st="border-color:var(--plume-orange);background:var(--color-accent-100)";}
+   return `<button class="choice" data-q="${i}" data-o="${j}" ${r!==undefined?"disabled":""} style="${st}"><span class="key">${"ABCD"[j]}</span>${o}</button>`}).join("")}</div>${r!==undefined?`<div class="block ${r===q.a?"block-aqua":"block-mist"}"><b style="display:block;margin-bottom:4px">${r===q.a?"Juste.":"Pas tout à fait."}</b><span style="font-size:14px">${md(q.why).replace(/<\/?p>/g,"")}</span></div>`:""}</div>`}).join("")}
+  ${Object.keys(chap.rep).length===Q.length&&Q.length?`<div class="t-bar"><span><b style="font-weight:600">${Q.filter((q,i)=>chap.rep[i]===q.a).length} / ${Q.length}</b> bonnes réponses</span><button class="btn btn-secondary" id="qagain"><i data-lucide="rotate-ccw"></i>Recommencer</button></div>`:""}</div>`;
+ }
+ C.innerHTML=`<a class="btn btn-ghost btn-sm back" href="#matieres/fr"><i data-lucide="arrow-left"></i>Français</a>
+<div class="head"><div><div class="eyebrow">Français · Grammaire</div><h1>${chap.titre}</h1></div></div>
+<div class="ctabs" role="tablist">${tabs.map(t=>`<button role="tab" class="ctab" aria-selected="${chap.tab===t}" data-t="${t}">${t}</button>`).join("")}</div>${corps}`;
+ C.querySelectorAll(".ctab").forEach(b=>b.onclick=()=>{chap.tab=b.dataset.t;rr();});
+ C.querySelectorAll('input[name="cmode"]').forEach(r=>r.onchange=()=>{chap.mode=r.value;rr();});
+ C.querySelectorAll(".choice[data-q]").forEach(b=>b.onclick=()=>{chap.rep[+b.dataset.q]=+b.dataset.o;rr();});
+ if($("#listen"))$("#listen").onclick=ecouter;
+ if($("#qagain"))$("#qagain").onclick=()=>{chap.rep={};rr();};
+}
+
 function route(){
  const [h,sub]=(location.hash||"#accueil").slice(1).split("/");
  if(h==="methodes"&&sub){if(sub==="vocab"){const r=document.querySelector('input[name="mtab"][value="vocab"]');r.checked=true;r.onchange();}else if(sub.startsWith("fiche")){fiche=+sub.slice(5)||0;renderMethods();}}
  if(h==="test"&&sub){if(sub==="q"){startQuiz(["fr","en","ma"]);quiz.pick=1;quiz.checked=true;quiz.by.fr.ok=1;}else if(sub==="res"){startQuiz(["fr","en","ma","ph","ch","bi"]);quiz.step="res";[["fr",3],["en",2],["ma",1],["ph",2],["ch",3],["bi",1]].forEach(([s,v])=>quiz.by[s].ok=v);}else if(sub==="all"){quiz={step:"intro",sel:["fr","en","ma","ph","ch","bi"]};}renderTest();}
- if(h==="matieres"&&sub)subj=sub;const id=["accueil","matieres","methodes","test"].includes(h)?h:"accueil";
+ if(h==="matieres"&&sub)subj=sub;if(h==="cours"&&sub)ouvrirChapitre(sub);const id=["accueil","matieres","methodes","test","cours"].includes(h)?h:"accueil";
  document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id==="s-"+id));
- document.querySelectorAll("[data-nav]").forEach(a=>a.dataset.nav===id?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
+ const nav=id==="cours"?"matieres":id;document.querySelectorAll("[data-nav]").forEach(a=>a.dataset.nav===nav?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
  if(id==="matieres")renderSubj();if(id==="test"&&!document.querySelector("#t-root").innerHTML)renderTest();
  window.scrollTo(0,0);icons();
 }

@@ -10,6 +10,7 @@ Puis ouvrir :
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.matieres import MATIERES
@@ -45,6 +46,24 @@ def detail_matiere(matiere_id: str):
             return m
     # Si on ne trouve pas la matière, on renvoie une erreur 404 (« introuvable »)
     raise HTTPException(status_code=404, detail="Matière introuvable")
+
+
+# Le contenu pédagogique (cours, fiches, exercices) est dans base-connaissances.
+DOSSIER_CONTENU = Path(__file__).resolve().parents[2] / "base-connaissances"
+
+
+@app.get("/contenu/{chemin:path}", response_class=PlainTextResponse)
+def contenu(chemin: str):
+    """Renvoie une fiche Markdown, par exemple /contenu/grammaire/subjonctif-present.md"""
+    fichier = (DOSSIER_CONTENU / chemin).resolve()
+    # Sécurité : on refuse tout fichier hors du dossier, ou qui n'est pas un .md
+    if (
+        not fichier.is_relative_to(DOSSIER_CONTENU)
+        or fichier.suffix != ".md"
+        or not fichier.is_file()
+    ):
+        raise HTTPException(status_code=404, detail="Contenu introuvable")
+    return fichier.read_text(encoding="utf-8")
 
 
 # Le site (HTML, CSS, JS) est dans le dossier frontend, à côté de backend.

@@ -43,3 +43,15 @@ def test_site_application():
     reponse = client.get("/app.html")
     assert reponse.status_code == 200
     assert "Tableau de bord" in reponse.text
+
+
+def test_contenu_chapitre():
+    reponse = client.get("/contenu/grammaire/subjonctif-present.md")
+    assert reponse.status_code == 200
+    assert "## Cours oral" in reponse.text
+
+
+def test_contenu_interdit_hors_dossier():
+    """On ne doit pas pouvoir lire un fichier en dehors de base-connaissances."""
+    assert client.get("/contenu/../backend/app/main.py").status_code == 404
+    assert client.get("/contenu/%2e%2e/%2e%2e/README.md").status_code == 404

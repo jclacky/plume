@@ -2,7 +2,7 @@ window.PLUME = {
 pillars: [["Grammaire",0],["Orthographe",0],["Vocabulaire",0],["Conjugaison",0],["Syntaxe",0],["Ponctuation",0],["Registres",0],["Écrit",0],["Oral",0]],
 subjects: [
 {id:"fr",name:"Français",icon:"pen-line",hours:"CECRL A1–C2",bg:"var(--plume-orange)",fg:"var(--plume-kite)",p:0,ref:"Niveaux CECRL",
- ch:["Grammaire","Orthographe","Vocabulaire","Conjugaison","Syntaxe","Ponctuation","Registres","Méthodes universitaires"]},
+ ch:["Écrire et parler poliment","Rapporter fidèlement","Argumenter","Présenter et défendre"]},
 {id:"en",name:"Anglais",icon:"languages",hours:"CECRL A1–C2",bg:"var(--plume-aqua)",fg:"var(--plume-kite)",p:0,ref:"Niveaux CECRL",
  ch:["Grammar","Spelling","Vocabulary","Tenses","Syntax","Punctuation","Registers","Academic methods"]},
 {id:"ma",name:"Mathématiques",icon:"sigma",hours:"150 h",bg:"var(--plume-kite)",fg:"var(--plume-snow)",p:0,ref:"Programme universitaire",
@@ -64,3 +64,27 @@ bi:[
 {part:"Cycle cellulaire",q:"À l'issue d'une mitose, on obtient :",o:["2 cellules identiques à la cellule mère","4 cellules haploïdes","2 cellules haploïdes","1 seule cellule"],a:0,why:"La mitose donne 2 cellules génétiquement identiques. Les 4 cellules haploïdes, c'est la méiose."},
 {part:"Système immunitaire",q:"Les anticorps sont produits par :",o:["les globules rouges","les lymphocytes T","les plaquettes","les lymphocytes B (plasmocytes)"],a:3,why:"Les lymphocytes B, une fois différenciés en plasmocytes, sécrètent les anticorps."}]
 };
+
+// Les 4 étapes du programme de français (base-connaissances/programmes/francais-objectifs.md).
+// slug = nom du fichier dans base-connaissances/grammaire/ ; vide = chapitre pas encore écrit.
+window.PLUME.etapes=[
+{t:"Écrire et parler poliment",dates:"octobre → décembre 2026",final:"Courriel à un professeur et à l'administration · question en TD",items:[
+ {type:"Grammaire",t:"Le subjonctif présent",slug:"subjonctif-present"},
+ {type:"Grammaire",t:"Le conditionnel présent"},
+ {type:"Grammaire",t:"Les pronoms compléments, le, en, y"},
+ {type:"Grammaire",t:"Les négations"},
+ {type:"Grammaire",t:"Les accords : adjectifs et participes"},
+ {type:"Oral",t:"Téléphoner et prendre rendez-vous"},
+ {type:"Oral",t:"Réclamer, se plaindre poliment"},
+ {type:"Oral",t:"Poser une question en cours"},
+ {type:"Méthode",t:"Écrire un courriel formel"}]},
+{t:"Rapporter fidèlement",dates:"janvier → mars 2027",final:"Compte rendu d'un cours · résumé oral de 3 minutes",items:[
+ {type:"Grammaire",t:"Les temps du passé"},{type:"Grammaire",t:"Le discours indirect"},{type:"Grammaire",t:"La forme passive"},{type:"Grammaire",t:"Les pronoms relatifs"},
+ {type:"Oral",t:"Résumer un cours"},{type:"Oral",t:"Décrire un processus"},{type:"Méthode",t:"Prendre des notes et faire un compte rendu"}]},
+{t:"Argumenter",dates:"avril → juin 2027",final:"Devoir argumenté de 2 pages · débat de 5 minutes",items:[
+ {type:"Grammaire",t:"Cause, conséquence, but"},{type:"Grammaire",t:"Opposition et concession"},{type:"Grammaire",t:"Condition et hypothèse"},{type:"Grammaire",t:"Nuancer son propos"},
+ {type:"Oral",t:"Donner son avis, nuancer, convaincre"},{type:"Oral",t:"Débattre"},{type:"Méthode",t:"Problématique et plan"}]},
+{t:"Présenter et défendre",dates:"juillet → octobre 2027",final:"Devoir de 3 pages · exposé de 10 minutes et questions",items:[
+ {type:"Grammaire",t:"Révision ciblée de vos erreurs"},{type:"Grammaire",t:"Participe, gérondif, nominalisation"},
+ {type:"Oral",t:"Présenter un exposé"},{type:"Oral",t:"Répondre à un jury"},{type:"Oral",t:"Les tics de langage"},{type:"Méthode",t:"Préparer un exposé"}]}
+];
