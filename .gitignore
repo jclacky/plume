@@ -1,0 +1,15 @@
+# Environnement Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets : la clé d'API ne doit JAMAIS aller sur GitHub
+.env
+
+# Base de données locale
+*.db
+
+# Fichiers d'éditeur
+.vscode/
+.DS_Store
