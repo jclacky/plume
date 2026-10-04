@@ -49,8 +49,8 @@ Cleid produit en autonomie, sans assistance extérieure :
 
 ## 3. Profil utilisateur et contraintes d'usage
 
-- **Utilisateur :** Cleid (27 ans, salarié avec planning décalé et travail les week-ends).
-- **Contexte principal :** séances courtes de 15 minutes sur smartphone dans les transports (trajets RER de 1h10), complétées par des sessions de travail approfondi sur ordinateur.
+- **Utilisateur :** un adulte qui reprend ses études en parallèle de son travail.
+- **Contexte principal :** séances courtes de 15 minutes sur smartphone dans les transports (trajets quotidiens), complétées par des sessions de travail approfondi sur ordinateur.
 - **Contrainte technique :** coupures de réseau fréquentes dans les transports (nécessité d'une saisie hors-ligne avec synchronisation dès reconnexion).
 - **Préférence d'interaction :** guidage direct, explications concises des règles, jamais de correction passive toute faite.
 
