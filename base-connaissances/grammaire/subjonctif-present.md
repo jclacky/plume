@@ -8,7 +8,45 @@ duree: 15 min
 
 # Le subjonctif présent
 
-## Cours
+## Cours oral
+
+*Le subjonctif dans la conversation de tous les jours. Écoutez le dialogue, puis lisez les remarques.*
+
+### Dialogue : à la sortie du TD
+
+> **Inès** : Le prof veut qu'on rende le dossier lundi. Tu as commencé ?
+> **Karim** : Pas encore. Il faut que je finisse le chapitre trois d'abord.
+> **Inès** : On peut le faire ensemble, si tu veux. Je préfère qu'on se voie à la bibliothèque, chez moi je n'arrive pas à me concentrer.
+> **Karim** : D'accord. Mais il faudrait que tu m'expliques l'exercice sur les dosages, j'ai rien compris.
+> **Inès** : Pas de souci. Par contre, je ne crois pas qu'on ait le temps de tout finir samedi.
+> **Karim** : Bon, on commence samedi et on termine dimanche. Ça te va ?
+> **Inès** : Parfait. J'ai peur qu'il soit très exigeant sur la présentation, alors on relit tout ensemble avant de l'envoyer.
+
+### Ce qu'on entend
+
+- À l'oral, on utilise surtout **il faut que**, **je veux que**, **je préfère que**, **j'ai peur que**, **je ne crois pas que**.
+- On dit souvent **on** à la place de **nous** : *Il faut qu'**on** parte*, plus naturel que *Il faut que **nous** partions*.
+- **À l'oreille, beaucoup de formes ne changent pas** : *que je parle* se prononce comme *je parle*. Le subjonctif s'entend surtout avec les verbes irréguliers : *que je **sois**, que j'**aille**, que je **fasse**, qu'il **puisse**, qu'on **ait***.
+- **Bien que** est rare à l'oral. On dit plutôt **même si** + indicatif : *Même si c'est dur, je continue.*
+- À l'oral familier, on entend parfois *j'ai rien compris* (sans *ne*). À l'écrit, il faut toujours écrire *je **n'**ai rien compris*.
+
+### À vous de parler
+
+Répondez à voix haute, en commençant par la formule proposée :
+1. Qu'est-ce que vous devez faire cette semaine ? → *Il faut que je…*
+2. Qu'est-ce que vous attendez de vos professeurs ? → *J'aimerais que…*
+3. Qu'est-ce qui vous inquiète pour la rentrée ? → *J'ai peur que…*
+
+## Cours écrit
+
+*Le subjonctif dans les textes universitaires et professionnels : courriel, rapport, dissertation.*
+
+### 0. Exemple dans un courriel formel
+
+> Madame,
+> Je souhaiterais que vous **puissiez** m'accorder un délai supplémentaire pour la remise du dossier. **Bien que** le travail **soit** bien avancé, il est nécessaire que je **vérifie** encore plusieurs résultats. Je vous remercie par avance de bien vouloir me répondre **afin que** je **puisse** m'organiser.
+
+À l'écrit soutenu, on utilise davantage **bien que, afin que, pour que, à condition que, il est nécessaire que, il est essentiel que**, et **nous** plutôt que *on*.
 
 ### 1. À quoi sert le subjonctif ?
 
@@ -164,6 +202,7 @@ Chaque phrase contient une erreur. Trouvez-la, puis corrigez-la.
 - Quand l'apprenant écrit un indicatif après un déclencheur du subjonctif, souligner le verbe et indiquer la catégorie « mode ». Ne pas donner la forme correcte. Demander : « Quel mot, avant ce verbe, impose un mode particulier ? »
 - Vérifier aussi les deux pièges inverses : un subjonctif après *après que*, et *que* + subjonctif quand le sujet est le même (infinitif attendu).
 - Pour *penser, croire, être sûr* : regarder si la phrase est affirmative, négative ou interrogative avant de signaler une erreur.
+- À l'oral (studio d'oral), ne pas signaler *on* à la place de *nous* ; signaler *même si* + subjonctif et *bien que* + indicatif. À l'écrit, signaler l'oubli du *ne* de la négation.
 - Après la correction de l'apprenant, expliquer la règle en une ou deux phrases, avec un exemple différent de sa phrase.
 
 ---
