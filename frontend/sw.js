@@ -2,7 +2,7 @@
 // pour que l'application s'ouvre même sans connexion (dans le RER).
 
 // Change ce numéro à chaque nouvelle version des fichiers.
-const CACHE = "plume-v3";
+const CACHE = "plume-v4";
 
 const FICHIERS = [
   "./", "index.html", "connexion.html", "app.html",

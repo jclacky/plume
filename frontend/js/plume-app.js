@@ -16,12 +16,14 @@ function renderSubj(){
  document.querySelectorAll(".tile").forEach(t=>t.onclick=()=>{subj=t.dataset.s;renderSubj();icons();});
  const s=D.subjects.find(x=>x.id===subj);
  $("#d-label").innerHTML=`<span>${s.name} · ${s.ch.length||"—"} chapitres</span><span>${s.ref}</span>`;
- const parts=["Fiche","Exercices","Notes","Quiz"];
- $("#chapters").innerHTML=s.ch.length?s.ch.map((c,i)=>{const st=chapState(s,i);const ok=st==="done"?4:st==="now"?2:0;
+ // Les parties de chaque chapitre. Le français n'a pas de « Notes » :
+ // il n'y a pas de cours de français à l'université, Plume est le cours.
+ const parts=s.id==="fr"?["Cours","Fiche","Exercices","Quiz"]:["Cours","Fiche","Exercices","Notes","Quiz"];
+ $("#chapters").innerHTML=s.ch.length?s.ch.map((c,i)=>{const st=chapState(s,i);const ok=st==="done"?parts.length:st==="now"?2:0;
   return `<div class="chap ${st}"><span class="k">${st==="done"?'<i data-lucide="check" style="width:16px;height:16px"></i>':i+1}</span><div><b>${c}</b><div class="parts">${parts.map((p,j)=>`<span class="${j<ok?"ok":""}">${p}</span>`).join("")}</div></div>${st==="now"?'<a class="btn btn-primary btn-sm" href="#accueil">Reprendre</a>':st==="done"?'<span class="tag tag-accent-2">Validé</span>':'<span class="tag tag-outline">À venir</span>'}</div>`}).join("")
   :`<div class="card" style="padding:28px"><div class="card-title">Programme à définir</div><p class="card-body">Les chapitres de culture générale seront ajoutés quand le programme sera fixé.</p></div>`;
  const done=s.ch.filter((_,i)=>chapState(s,i)==="done").length;
- $("#d-side").innerHTML=`<div class="sec" style="margin:0">Progression</div><div class="big">${s.p}<span style="font-size:28px"> %</span></div><div class="progress"><i style="--v:${s.p}%"></i></div><p style="margin:0;font-size:14px">${done} chapitre${done>1?"s":""} validé${done>1?"s":""} sur ${s.ch.length||"—"}.${s.id==="ma"||s.id==="ph"||s.id==="ch"||s.id==="bi"?" Examen écrit en juin 2027.":""}</p><a class="btn btn-secondary btn-block" href="#accueil"><i data-lucide="upload"></i>Ajouter mes notes</a>`;
+ $("#d-side").innerHTML=`<div class="sec" style="margin:0">Progression</div><div class="big">${s.p}<span style="font-size:28px"> %</span></div><div class="progress"><i style="--v:${s.p}%"></i></div><p style="margin:0;font-size:14px">${done} chapitre${done>1?"s":""} validé${done>1?"s":""} sur ${s.ch.length||"—"}.${s.id==="ma"||s.id==="ph"||s.id==="ch"||s.id==="bi"?" Examen écrit en juin 2027.":""}</p>${s.id==="fr"?"":`<a class="btn btn-secondary btn-block" href="#accueil"><i data-lucide="upload"></i>Ajouter mes notes</a>`}`;
 }
 
 function renderMethods(){
